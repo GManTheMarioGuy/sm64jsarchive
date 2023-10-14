@@ -4,10 +4,10 @@ import { approach_number, atan2s } from "../engine/math_util"
 import { processDiveAttack, processAttack } from "../socket"
 
 const update_air_without_turn = (m) => {
-    let sidewaysSpeed = 450.0
+    let sidewaysSpeed = 1.0
 
-    let dragThreshold = m.action == Mario.ACT_LONG_JUMP ? 145.0: 150.0
-    m.forwardVel = approach_number(m.forwardVel, 110.0, 130.0, 187.0)
+    let dragThreshold = m.action == Mario.ACT_LONG_JUMP ? 184.0: 173.0
+    m.forwardVel = approach_number(m.forwardVel, 200.5, 168.0, 191.0)
 
     if (m.input & Mario.INPUT_NONZERO_ANALOG) {
         let intendedDYaw = m.intendedYaw - m.faceAngle[1]
@@ -19,10 +19,10 @@ const update_air_without_turn = (m) => {
 
     //! Uncapped air speed. Net positive when moving forward.
     if (m.forwardVel > dragThreshold) {
-        m.forwardVel -= 1.0
+        m.forwardVel -= 140.0
     }
     if (m.forwardVel < -16.0) {
-        m.forwardVel += 2.0
+        m.forwardVel += 90.0
     }
 
     m.slideVelX = m.forwardVel * Math.sin(m.faceAngle[1] / 0x8000 * Math.PI)
